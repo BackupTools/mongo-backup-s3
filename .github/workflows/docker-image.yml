@@ -22,6 +22,6 @@ jobs:
     - name: Login to Dockerhub
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
     - name: Push the Docker image
-      run:  docker push standartag/mongo-backup:${{steps.vars.outputs.tag}}
+      run:  docker push standartag/mongo-backup:${{steps.vars.outputs.sha_short}}
     - name: Push the :latest Docker image
       run:  docker push standartag/mongo-backup
