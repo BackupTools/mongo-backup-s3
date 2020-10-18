@@ -16,9 +16,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: Get the version
       id: vars
-      run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
+      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag standartag/mongo-backup:${{steps.vars.outputs.tag}} --tag standartag/mongo-backup
+      run: docker build . --file Dockerfile --tag standartag/mongo-backup:${{steps.vars.outputs.sha_short}} --tag standartag/mongo-backup
     - name: Login to Dockerhub
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
     - name: Push the Docker image
