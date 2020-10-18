@@ -1,5 +1,7 @@
 # MongoDB 4.0 S3 docker/kubernetes backup
 
+[![Build status](https://github.com/standart-ag/mongo-backup-s3/workflows/Docker%20Image%20CI/badge.svg)]()
+
 Docker image to backup MongoDB 4.0 to S3 using mongodump and compress using pigz.
 
 ## Configuration
