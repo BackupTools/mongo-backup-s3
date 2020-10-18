@@ -4,6 +4,16 @@
 
 Docker image to backup MongoDB 4.0 to S3 using mongodump and compress using pigz.
 
+## Advantages/features
+- [x] Supports custom S3 endpoints (e.g. minio)
+- [x] Uses piping instead of tmp file
+- [x] Compression is done with pigz (parallel gzip)
+- [x] Creates bucket if it's not created
+- [x] Can be run in Kubernetes or Docker
+- [ ] TODO: OpenSSL encryption
+- [ ] TODO: Add other compression methods
+- [ ] TODO: Add other dbs (e.g. postgres, mysql)
+
 ## Configuration
 ```bash
 S3_BUCK=mongo1-backups
