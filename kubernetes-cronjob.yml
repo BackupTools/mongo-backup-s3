@@ -1,0 +1,30 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: my-mongo-backup
+spec:
+  schedule: "5 */8 * * *"
+  concurrencyPolicy: Replace
+  startingDeadlineSeconds: 200
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 10
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: mongo-backup-my-app
+            image: standartag/mongo-backup
+            env:
+              - name: MONGO_URI
+                value: mongodb://db-svc-or-hostname:27017/dbname
+              - name: S3_URI
+                value: https://your-key:your-secret@s3.host.tld
+              - name: S3_NAME
+                value: folder-name/backup-name
+              - name: S3_BUCK
+                value: backup-s3-bucket-name
+---
+

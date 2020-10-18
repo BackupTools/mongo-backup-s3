@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  mongo-backup:
+    image: standartag/mongo-backup
+    build: .
+    environment:
+      - S3_BUCK=mongo1-backups
+      - S3_NAME=folder-name/backup-name-prefix
+      - S3_URI=https://s3-key:s3-secret@s3.host.tld
+      - MONGO_URI=mongodb://mongo-host:27017/db-name
