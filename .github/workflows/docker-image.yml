@@ -1,0 +1,27 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get the version
+      id: vars
+      run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag standartag/mongo-backup:${{steps.vars.outputs.tag}} --tag standartag/mongo-backup
+    - name: Login to Dockerhub
+      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+    - name: Push the Docker image
+      run:  docker push standartag/mongo-backup:${{steps.vars.outputs.tag}}
+    - name: Push the :latest Docker image
+      run:  docker push standartag/mongo-backup
