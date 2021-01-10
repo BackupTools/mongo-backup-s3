@@ -10,7 +10,7 @@ Docker image to backup MongoDB 4.0 to S3 using mongodump and compress using pigz
 - [x] Compression is done with pigz (parallel gzip)
 - [x] Creates bucket if it's not created
 - [x] Can be run in Kubernetes or Docker
-- [ ] TODO: OpenSSL encryption
+- [x] PGP encryption
 - [ ] TODO: Add other compression methods
 - [ ] TODO: Add other dbs (e.g. postgres, mysql)
 
@@ -20,6 +20,8 @@ S3_BUCK=mongo1-backups
 S3_NAME=folder-name/backup-name-prefix
 S3_URI=https://s3-key:s3-secret@s3.host.tld
 MONGO_URI=mongodb://mongo-host:27017/db-name
+GPG_KEYSERVER=keyserver.ubuntu.com # your hpks keyserver
+GPG_KEYID=<key_id> # recipient key, backup will be encrypted if added
 ```
 
 Or see `docker-compose.yml` file to run this container with Docker.
