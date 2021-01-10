@@ -16,7 +16,7 @@ spec:
           restartPolicy: OnFailure
           containers:
           - name: mongo-backup-my-app
-            image: standartag/mongo-backup
+            image: backuptools/mongo-backup-s3
             env:
               - name: MONGO_URI
                 value: mongodb://db-svc-or-hostname:27017/dbname

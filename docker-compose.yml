@@ -2,7 +2,7 @@ version: "3"
 
 services:
   mongo-backup:
-    image: standartag/mongo-backup
+    image: backuptools/mongo-backup-s3
     build: .
     environment:
       - S3_BUCK=mongo1-backups
