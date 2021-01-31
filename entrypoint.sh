@@ -26,11 +26,11 @@ mc mb backup/${S3_BUCK} --insecure
 
 if [ -z "$GPG_KEYID" ]
 then
-    mongodump --uri $MONGO_URI --archive | pigz -9 | mc pipe backup/${S3_BUCK}/${S3_NAME}-`date +%Y-%m-%d_%H-%M-%S`.archive --insecure
+    mongodump --uri $MONGO_URI --archive | pigz -9 | mc pipe backup/${S3_BUCK}/${S3_NAME}-`date +%Y-%m-%d_%H-%M-%S`.archive.gz --insecure
 else
     mongodump --uri $MONGO_URI --archive | pigz -9 \
      | gpg --encrypt -z 0 --recipient ${GPG_KEYID} --trust-model always \
-     | mc pipe backup/${S3_BUCK}/${S3_NAME}-`date +%Y-%m-%d_%H-%M-%S`.archive.pgp --insecure
+     | mc pipe backup/${S3_BUCK}/${S3_NAME}-`date +%Y-%m-%d_%H-%M-%S`.archive.gz.pgp --insecure
 fi
 
 echo "$(get_date) Mongo backup completed successfully"
